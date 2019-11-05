@@ -30,7 +30,7 @@ Reprocessing codes for the rat rs-fMRI database.
 ```bash
 ./  
 ├── rat001  
-│   ├── rat001_info.json  [Sequence names, acquisition dates, number of frames, and corresponding names in folders
+│   ├── rat001_info.json  [Sequence names, acquisition dates, number of frames, and corresponding names inside folders
 │   ├── raw  [Nifti files converted from raw Bruker data using Bru2Nii (https://github.com/neurolabusc/Bru2Nii)
 │   │   ├── X2P1.nii  
 │   │   ├── X4P1.nii  
