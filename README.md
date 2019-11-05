@@ -1,5 +1,5 @@
-# Rat rsfMRI preprocessing
-Reprocessing codes for the rat rs-fMRI database. 
+# Rat rsfMRI Preprocessing Toolbox
+Preprocessing codes for the rat rs-fMRI database. 
 
 ## Prerequisites:
 1. GIFT ICA toolbox. (https://www.nitrc.org/projects/gift)
