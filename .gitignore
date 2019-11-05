@@ -1,0 +1,12 @@
+# Ignore MATLAB temp files
+*~
+
+# Ignore ipynb checkpoints
+.ipynb_checkpoints/
+
+# Ignore jsonlab
+jsonlab/
+
+get_scan_metadata.m
+inputs_icarat*
+reorganize_files.m
