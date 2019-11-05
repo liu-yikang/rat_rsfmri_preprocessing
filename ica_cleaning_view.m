@@ -22,7 +22,7 @@ function varargout = ica_cleaning_view(varargin)
 
 % Edit the above text to modify the response to help ica_cleaning_view
 
-% Last Modified by GUIDE v2.5 28-Jun-2019 13:47:35
+% Last Modified by GUIDE v2.5 05-Nov-2019 14:07:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,31 +58,9 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-global result_path ic_index scan_index scan_list label_table;
-ic_index = 1;
-scan_index = 1;
-result_path = strrep(mfilename('fullpath'), 'ica_cleaning_view', '');
-handles.text2.String = result_path;
-scan_list = dir(fullfile(result_path, '*EPI*'));
-if ~isempty(scan_list)
-    scans = {};
-    for i_list = 1:length(scan_list)
-        scans(end+1, 1) = {scan_list(i_list).name};
-    end
-    handles.listbox1.String = scans;
-    try
-        [~,~,label_table] = xlsread(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.xlsx']));
-        label_table = label_table(1:51,1:4);
-    catch
-        label_table = cell(51,4);
-        label_table(1,2:4) = {'RSN','NOISE','OTHER'};
-    end
-    update_result(handles);
-end
-
 % UIWAIT makes ica_cleaning_view wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-
+handles.text4.String = '#IC: ';            
 
 % --- Outputs from this function are returned to the command line.
 function varargout = ica_cleaning_view_OutputFcn(hObject, eventdata, handles) 
@@ -102,7 +80,7 @@ imshow(im, 'Parent', handles.axes1);
 im = imread(fullfile(result_path, scan_list(scan_index).name, 'report' ,['ic', num2str(ic_index), '_tc.tif']));
 imshow(im, 'Parent', handles.axes2);
 try
-    idx = find(cell2mat(label_table(ic_index+1, 2:4))==1);
+    idx = find(label_table{ic_index, 2:4}==1);
     if idx == 1
         handles.radiobutton1.Value = 1;
         handles.radiobutton2.Value = 0;
@@ -155,17 +133,17 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global ic_index label_table;
 if handles.radiobutton1.Value == 1
-    label_table{ic_index+1, 2} = 1;
-    label_table{ic_index+1, 3} = 0;
-    label_table{ic_index+1, 4} = 0;
+    label_table{ic_index, 2} = 1;
+    label_table{ic_index, 3} = 0;
+    label_table{ic_index, 4} = 0;
 elseif handles.radiobutton2.Value == 1
-    label_table{ic_index+1, 2} = 0;
-    label_table{ic_index+1, 3} = 1;
-    label_table{ic_index+1, 4} = 0;
+    label_table{ic_index, 2} = 0;
+    label_table{ic_index, 3} = 1;
+    label_table{ic_index, 4} = 0;
 elseif handles.radiobutton3.Value == 1
-    label_table{ic_index+1, 2} = 0;
-    label_table{ic_index+1, 3} = 0;
-    label_table{ic_index+1, 4} = 1;
+    label_table{ic_index, 2} = 0;
+    label_table{ic_index, 3} = 0;
+    label_table{ic_index, 4} = 1;
 end
 if ic_index == 1
     msgbox('It''s the first IC!');
@@ -181,17 +159,17 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global ic_index label_table;
 if handles.radiobutton1.Value == 1
-    label_table{ic_index+1, 2} = 1;
-    label_table{ic_index+1, 3} = 0;
-    label_table{ic_index+1, 4} = 0;
+    label_table{ic_index, 2} = 1;
+    label_table{ic_index, 3} = 0;
+    label_table{ic_index, 4} = 0;
 elseif handles.radiobutton2.Value == 1
-    label_table{ic_index+1, 2} = 0;
-    label_table{ic_index+1, 3} = 1;
-    label_table{ic_index+1, 4} = 0;
+    label_table{ic_index, 2} = 0;
+    label_table{ic_index, 3} = 1;
+    label_table{ic_index, 4} = 0;
 elseif handles.radiobutton3.Value == 1
-    label_table{ic_index+1, 2} = 0;
-    label_table{ic_index+1, 3} = 0;
-    label_table{ic_index+1, 4} = 1;
+    label_table{ic_index, 2} = 0;
+    label_table{ic_index, 3} = 0;
+    label_table{ic_index, 4} = 1;
 end
 if ic_index == 50
     msgbox('It''s the last IC!');
@@ -212,16 +190,11 @@ global scan_index ic_index label_table scan_list result_path;
 ic_index = 1;
 scan_index = get(hObject, 'Value');
 try
-    [~,~,label_table] = xlsread(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.xlsx']));
-    label_table = label_table(1:51,1:4);
+    label_table = readtable(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.csv']));
+    % label_table = label_table(1:51,1:4);
 catch
-    label_table = {};
-    for i = 1:50
-        label_table{i+1,1} = i;
-    end
-    label_table{1,2} = 'RSN';
-    label_table{1,3} = 'NOISE';
-    label_table{1,4} = 'OTHER';
+    label_table = table((1:50)', zeros(50,1), zeros(50,1), zeros(50,1), ...
+        'VariableNames', {'IC_NO', 'RSN', 'NOISE', 'OTHER'});
 end
 update_result(handles);
 
@@ -245,9 +218,10 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global result_path ic_index scan_index scan_list label_table;
-xlswrite(fullfile(result_path, 'labels', ...
-    [scan_list(scan_index).name,'.xlsx']), label_table);
-handles.text4.String = ['#IC: ',num2str(ic_index)];
+mkdir(fullfile(result_path, 'labels'));
+writetable(label_table, fullfile(result_path, 'labels', ...
+    [scan_list(scan_index).name,'.csv']));
+% handles.text4.String = ['#IC: ',num2str(ic_index)];
 
 % --- Executes during object creation, after setting all properties.
 function uibuttongroup1_CreateFcn(hObject, eventdata, handles)
@@ -287,3 +261,33 @@ function radiobutton3_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of radiobutton3
 handles.radiobutton1.Value = 0;
 handles.radiobutton2.Value = 0;
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over pushbutton1.
+function pushbutton1_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global result_path ic_index scan_index scan_list label_table;
+result_path = uigetdir;
+ic_index = 1;
+scan_index = 1;
+% result_path = strrep(mfilename('fullpath'), 'ica_cleaning_view', '');
+handles.text2.String = result_path;
+scan_list = dir(fullfile(result_path, '*EPI*'));
+if ~isempty(scan_list)
+    scans = {};
+    for i_list = 1:length(scan_list)
+        scans(end+1, 1) = {scan_list(i_list).name};
+    end
+    handles.listbox1.String = scans;
+    try
+        label_table = readtable(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.csv']));
+        % label_table = label_table(1:51,1:4);
+    catch
+        label_table = table((1:50)', zeros(50,1), zeros(50,1), zeros(50,1), ...
+            'VariableNames', {'IC_NO', 'RSN', 'NOISE', 'OTHER'});
+    end
+    update_result(handles);
+end
