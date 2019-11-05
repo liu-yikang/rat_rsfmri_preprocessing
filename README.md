@@ -1,4 +1,4 @@
-# rat_rsfmri_preprocessing
+# Rat rsfMRI preprocessing
 Reprocessing codes for the rat rs-fMRI database. 
 
 ## Prerequisites:
