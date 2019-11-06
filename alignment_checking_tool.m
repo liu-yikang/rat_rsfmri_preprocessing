@@ -532,7 +532,7 @@ if isempty(landmark)
 %         brain_mask = brain_mask.img;
 %         perim = bwperim(brain_mask, 8);
 %         landmark_mask = perim|WM_CSF_mask>0;
-        landmark_mask = load_nii('landmark.nii');
+        landmark_mask = load_nii('landmark.nii.gz');
         landmark_mask = landmark_mask.img;
         ref_mask = imref3d(size(landmark_mask),[0 32],[0 32],[0 20]);
         t = eye(4);
