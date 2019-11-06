@@ -11,3 +11,5 @@ get_scan_metadata.m
 inputs_icarat*
 reorganize_files.m
 update_json_files.m
+xlsx2csv.m
+tmp/

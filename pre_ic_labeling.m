@@ -1,7 +1,21 @@
-% %%%%%%%%%%%% set parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preprocessing steps after manually coregistering rsfMRI to a template and
+% before manually labeling noise independent components.
+
+% Author: Yikang Liu
+% Last modified data: 11/05/2019
+
+% Description:
+% 1. Correcting head motions in manually coregistered images with SPM.
+% 2. Spatial smoothing the motion-corrected images with a Gaussian kernel 
+% with FWHM = FWHM_ica; Run ICA on smoothed images with #IC=50.
+% 3. Spatial smoothing the motion-corrected images with a Gaussian kernel 
+% with FWHM = FWHM. Save the averaged WM/CSF signals in the resulting
+% images.
+
+%%%%%%%%%%%%%% set parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 data_dir='/home/project/organize_database/Rat_Database_AllBaseline';
-FWHM_ica = 0.7;
-FWHM = 1;
+FWHM_ica = 0.7; % unit mm
+FWHM = 1; % unit mm
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % read in the brain mask

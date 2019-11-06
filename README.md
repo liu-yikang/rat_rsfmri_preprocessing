@@ -16,7 +16,7 @@ Preprocessing codes for the rat rs-fMRI database.
 *Spatial smoothing;*  
 *Save averaged WM/CSF signal.*  
 4. copy\_ica\_results\_4labeling.m  
-*Copy ICA results to an temporay folder for the ease of manual labeling.*  
+*Copy ICA results to an temporary folder for the ease of manual labeling.*  
 *Save spatial maps, time courses, and frequency spetrums of the ICs to figures.*  
 5. ica_cleaning_view.m  
 *A GUI to manually label the ICs.*  
@@ -67,7 +67,7 @@ Preprocessing codes for the rat rs-fMRI database.
 │   │   │   ├── ica__sub01\_component\_ica\_s1_.nii
 │   │   │   ├── ica__sub01\_timecourses\_ica\_s1_.nii
 │   │   │   ├── ica_Subject.mat
-│   │   │   └── labels.xlsx  [IC labels: only the ones labeled with 'noise' were soft-regressed] 
+│   │   │   └── labels.csv  [IC labels: only the ones labeled with 'noise' were soft-regressed] 
 │   │   ├── 02\_WMCSF_timeseries.json
 │   │   ├── 02\_WMCSF_timeseries.txt  [Averaged signal from white matter and ventricle voxels]
 │   │   ├── ...

@@ -1,12 +1,13 @@
-% Despike (motion scrub) a rsfMRI scan
+% Despike (motion scrub) rsfMRI scans
+
 % Authors: Yikang Liu and Zhiwei Ma
 % Last modified data: 11/03/2019
 
 % Description:
-% 1. calculate relative framewise displacement and then identify the motion volumes (the motion volume itself and its nearest temporal neighbors) which need to be excluded
-% 2. also remove the first 10 volumes of each original EPI run (ensure the magnetization to reach a steady state)
+% 1. Calculate relative framewise displacement and then identify the motion volumes (the motion volume itself and its nearest temporal neighbors) which need to be excluded
+% 2. Also remove the first 10 volumes of each original EPI run (ensure the magnetization to reach a steady state)
 
-% %%%%%%%%%%%% obtain parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% set parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 data_dir='/home/labuser/project/organize_database/Rat_Database_AllBaseline';    % obtain data directory
 T_removed=10;           % the number of intial volumes for removal
 remove_motion_NN=1;     % the option for removing the nearest temporal neighbors of motion volumes
@@ -18,7 +19,7 @@ use_parallel = true;    % the indicator (true/false) to use parallel computing
 disp(['The current working directory is ',data_dir])
 rats = dir(fullfile(data_dir, 'rat*'));
 
-for i=20:length(rats)
+for i=1:length(rats)
     cd(fullfile(rats(i).folder, rats(i).name));
     scans=dir(fullfile('rfmri_unprocessed', '*.nii'));
     for j=1:length(scans)

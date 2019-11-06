@@ -1,4 +1,11 @@
 function varargout = ica_cleaning_view(varargin)
+
+% GUI for labeling indepedent components. 
+% Labels saved as .csv files in ./labels
+
+% Author: Yikang Liu
+% Last modified data: 11/05/2019
+
 % ICA_CLEANING_VIEW MATLAB code for ica_cleaning_view.fig
 %      ICA_CLEANING_VIEW, by itself, creates a new ICA_CLEANING_VIEW or raises the existing
 %      singleton*.

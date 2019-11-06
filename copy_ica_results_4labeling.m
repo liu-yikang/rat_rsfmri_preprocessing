@@ -1,6 +1,18 @@
-%% copy out ICA results for manual labeling
+% Copy ICA results to an temporary folder for the ease of manual labeling
+% and save spatial maps, time courses, and frequency spetrums of the ICs to
+% figures.
+
+% Author: Yikang Liu
+% Last modified data: 11/05/2019
+
+%%%%%%%%%%%%%% set parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 data_dir = '/home/project/organize_database/Rat_Database_AllBaseline';
+% database folder
 ica_dir = '/home/project/organize_database/test';
+% temporary ICA folder
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% copy out ICA results for manual labeling
 mkdir(ica_dir);
 rat_list = dir(fullfile(data_dir, 'rat*'));
 for i = 1:length(rat_list)
@@ -14,7 +26,6 @@ end
 %% plot ICs
 list = dir(ica_dir);
 list(1:2) = [];
-data_dir = '/home/project/organize_database/Rat_Database_AllBaseline';
 
 for i = 1:length(list)
     cd(fullfile(list(i).folder, list(i).name));
@@ -49,13 +60,4 @@ for i = 1:length(list)
         export_fig(fullfile(list(i).folder, list(i).name, 'report', ['ic', num2str(j),'_tc.tif']));
         close all;
     end
-end
-
-%% copy back labeled ICA results
-ica_dir = '/home/yliu/projects/organize_database/ica/indi_clean_wo_nr_sm7';
-list = dir(fullfile(ica_dir, 'labels', '*xlsx'));
-cd(fullfile(ica_dir, 'labels'));
-for i = 1:length(list)
-    copyfile(list(i).name, fullfile(data_dir, ['rat', list(i).name(1:6)], ...
-        'rfmri_intermediate', [list(i).name(8:9), '.gift_ica'], 'labels.xlsx'));
 end
