@@ -7,7 +7,8 @@
 % Description:
 % 1. Correcting head motions in manually coregistered images with SPM.
 % 2. Spatial smoothing the motion-corrected images with a Gaussian kernel 
-% with FWHM = FWHM_ica; Run ICA on smoothed images with #IC=50.
+% with FWHM = FWHM_ica; Run ICA on smoothed images with #IC=50 
+% (feed 'inputs_ica.m' to the GIFT toolbox).
 % 3. Spatial smoothing the motion-corrected images with a Gaussian kernel 
 % with FWHM = FWHM. Save the averaged WM/CSF signals in the resulting
 % images.
