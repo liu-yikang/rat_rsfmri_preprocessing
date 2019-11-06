@@ -4,6 +4,7 @@ Preprocessing codes for the rat rs-fMRI database.
 ## Prerequisites:
 1. GIFT ICA toolbox. (https://www.nitrc.org/projects/gift)
 2. jsonlab. (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files)
+3. Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
 
 ## Preprocessing steps
 1. rsfmri_despiking.m  
