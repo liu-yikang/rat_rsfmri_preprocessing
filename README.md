@@ -7,7 +7,7 @@ Preprocessing codes for the rat rs-fMRI database.
 3. Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
 
 ## Preprocessing steps
-1. rsfmri_despiking.m  
+1. despiking.m  
 *Discard frames with excessive motion in data (aka motion scrubbing).*
 2. alignment\_checking\_tool.m  
 *A graphcial user interface (GUI) to manually coregister a rsfMRI scan to a template.*
