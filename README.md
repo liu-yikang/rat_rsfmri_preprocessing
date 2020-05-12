@@ -52,6 +52,8 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 │   │   ├── 02_registered.nii.gz  [Manually coregistered image] 
 │   │   ├── 02_motioncorrected.json
 │   │   ├── 02_motioncorrected.nii.gz  [Motion corrected image]
+│   │   ├── 02_warped.json
+│   │   ├── 02_warped.nii.gz  [Deformably registered image]
 │   │   ├── 02_motion.json
 │   │   ├── 02_motion.txt  [Motion parameters]
 │   │   ├── 02.gift_ica  [Results from single-scan ICA]
