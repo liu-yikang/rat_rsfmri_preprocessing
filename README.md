@@ -44,16 +44,18 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 │   │   ├── 03.nii
 │   │   └── 04.nii
 │   ├── rfmri_intermediate  [Intermediate files generated from preprocessing] 
-│   │   ├── 01_despiked.json
+│   │   ├── 01_despiked.json	[Contains framewise displacements, scrubbing criterion, and scrubbed frames]
 │   │   ├── 01_despiked.nii.gz  [Not further processed since more than 10% of the frames were motion-scrubbed]
 │   │   ├── 02_despiked.json
 │   │   ├── 02_despiked.nii.gz  [Despiked image] 
-│   │   ├── 02_registered.json
+│   │   ├── 02_registered.json		[Contains rigid-body registration matrix]
 │   │   ├── 02_registered.nii.gz  [Manually coregistered image] 
 │   │   ├── 02_motioncorrected.json
 │   │   ├── 02_motioncorrected.nii.gz  [Motion corrected image]
 │   │   ├── 02_warped.json
 │   │   ├── 02_warped.nii.gz  [Deformably registered image]
+│   │   ├── 02_warp_field.nii.gz  [Deformation field]
+│   │   ├── 02_warp_affine.txt  [Affine transformation applied with the deformation field]
 │   │   ├── 02_motion.json
 │   │   ├── 02_motion.txt  [Motion parameters]
 │   │   ├── 02.gift_ica  [Results from single-scan ICA]
@@ -72,7 +74,7 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 │   │   │   ├── ica_Subject.mat
 │   │   │   └── labels.csv  [IC labels: only the ones labeled with 'noise' were soft-regressed] 
 │   │   ├── 02\_WMCSF_timeseries.json
-│   │   ├── 02\_WMCSF_timeseries.txt  [Averaged signal from white matter and ventricle voxels]
+│   │   ├── 02\_WMCSF_timeseries.txt  [Averaged signal and PCs from white matter and ventricle voxels]
 │   │   ├── ...
 │   └── rfmri_processed  [Preprocessed images]
 │       ├── 02.json
