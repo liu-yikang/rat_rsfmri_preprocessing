@@ -53,7 +53,7 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 │   │   ├── 02_motioncorrected.json
 │   │   ├── 02_motioncorrected.nii.gz  [Motion corrected image]
 │   │   ├── 02_warped.json
-│   │   ├── 02_warped.nii.gz  [Deformably registered image]
+│   │   ├── 02_warped.nii.gz  [Warped image]
 │   │   ├── 02_warp_field.nii.gz  [Deformation field]
 │   │   ├── 02_warp_affine.txt  [Affine transformation applied with the deformation field]
 │   │   ├── 02_motion.json
