@@ -48,7 +48,7 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 │   │   ├── 01_despiked.nii.gz  [Not further processed since more than 10% of the frames were motion-scrubbed]
 │   │   ├── 02_despiked.json
 │   │   ├── 02_despiked.nii.gz  [Despiked image] 
-│   │   ├── 02_registered.json		[Contains rigid-body registration matrix]
+│   │   ├── 02_registered.json	[Contains rigid-body registration matrix]
 │   │   ├── 02_registered.nii.gz  [Manually coregistered image] 
 │   │   ├── 02_motioncorrected.json
 │   │   ├── 02_motioncorrected.nii.gz  [Motion corrected image]
