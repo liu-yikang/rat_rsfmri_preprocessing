@@ -17,16 +17,16 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 4. ica_cleaning.m  
 *Run independent component analysis (ICA) with the GIFT ICA toolbox to identify noisy independent components (ICs);*  
 5. copy\_ica\_results\_4labeling.m  
-* *Copy ICA results to an temporary folder for the ease of manual labeling.*  
-* *Save spatial maps, time courses, and frequency spetrums of the ICs to figures.*  
+*Copy ICA results to an temporary folder for the ease of manual labeling.*  
+*Save spatial maps, time courses, and frequency spetrums of the ICs to figures.*  
 6. ica_cleaning_view.m  
 *A GUI to manually label the ICs.*  
 7. copy\_labels.m  
 *Copy IC labels to the database folder.*  
 8. last_steps.m  
-* *Soft IC-regressing the spatially-smoothed images, along with the motion parameters and the [CompCor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2214855/) regressors;*  
-* *Spatial smoothing.*
-* *Temporal filtering.*  
+*Soft IC-regressing warped images, along with the motion parameters and the [CompCor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2214855/) regressors;*  
+*Spatial smoothing.*
+*Temporal filtering.*  
 
 ## Database folder structure
 ```bash
