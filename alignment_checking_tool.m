@@ -298,7 +298,7 @@ try
         nii = load_nii(fullfile(strrep(pathstr,'aligned','functional'),...
             [name_new,'.img'])); % load original image        
     end
-    img = nii.img(end:-1:1,:,:,:);
+    img = nii.img;
 catch
     if contains(name_new, 'sdt')
         img = loadSdt(fullfile(pathstr,name_new));
@@ -318,9 +318,9 @@ catch
 end
 img_out = zeros(ref_out.ImageSize);
 for i = 1:size(img,4)
-    img_out(end:-1:1,:,:,i) = permute(imwarp(permute(img(:,:,:,i),[2 1 3]),ref0,tform,'cubic','OutputView',ref_out),[2 1 3]);
+    img_out(:,:,:,i) = permute(imwarp(permute(img(:,:,:,i),[2 1 3]),ref0,tform,'cubic','OutputView',ref_out),[2 1 3]);
 end
-nii = make_nii(img_out,[dx,dy,dz]);
+nii = make_nii(img_out,[dx,dy,dz],[1,1,1]);
 name_new = strsplit(name_new,'.'); % remove file extension
 mkdir(strrep(pathstr,'functional','aligned'));
 save_nii(nii,fullfile(strrep(pathstr,'functional','aligned'),['mr',name_new{1},'.nii']));
@@ -922,7 +922,7 @@ if isempty(tform0) || isempty(ref0) || isempty(img0)
         if contains(filename,'nii')
             nii = load_nii(filename);
             img = double(nii.img);
-            img = img(:,end:-1:1,:,:);
+            % img = img(:,end:-1:1,:,:);
             img0_dx = nii.hdr.dime.pixdim(2);
             img0_dy = nii.hdr.dime.pixdim(3);
             img0_dz = nii.hdr.dime.pixdim(4);
@@ -952,7 +952,8 @@ if isempty(tform0) || isempty(ref0) || isempty(img0)
 %             img = mean(img(:,:,:,index_slct),4);
 %         end
         
-        img0 = img(end:-1:1,:,:,1);
+        % img0 = img(end:-1:1,:,:,1);
+        img0 = img(:,:,:,1);
         ref0 = imref3d(size(img0),[0,size(img0,1)*img0_dx],...
             [0,size(img0,2)*img0_dy],...
             [0,size(img0,3)*img0_dz]);
@@ -1527,7 +1528,7 @@ if ~isempty(strfind(filename,'nii')) || ~isempty(strfind(filename,'img'))...
         dz=1;
     end
     img = double(nii.img);
-    img = img(:,end:-1:1,:,1);
+    % img = img(:,end:-1:1,:,1);
 elseif strcmp(filename(end-2:end),'sdt')||strcmp(filename(end-2:end),'spr')
     [img,dx,dy,dz] = loadSdt(filename);
     if handles.checkbox_rat.Value  
@@ -1535,7 +1536,8 @@ elseif strcmp(filename(end-2:end),'sdt')||strcmp(filename(end-2:end),'spr')
     end
     img = img(:,end:-1:1,:,1);
 end
-img = img(end:-1:1,:,:,1);
+% img = img(end:-1:1,:,:,1);
+img = img(:,:,:,1);
 
 if sum(img(:)) == 0 % automatic alignment failed
     filename = strrep(filename,'r_mean_','');
@@ -1752,7 +1754,8 @@ if isempty(img0)
 %         img = mean(img(:,:,:,index_slct),4);
 %     end
     
-    img0 = img(end:-1:1,:,:,1);
+    %img0 = img(end:-1:1,:,:,1);
+    img0 = img(:,:,:,1);
     ref0 = imref3d(size(img0),[0,size(img0,1)*img0_dx],...
         [0,size(img0,2)*img0_dy],...
         [0,size(img0,3)*img0_dz]);

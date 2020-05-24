@@ -5,27 +5,28 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 1. GIFT ICA toolbox. (https://www.nitrc.org/projects/gift)
 2. jsonlab. (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files)
 3. Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
+4. ANTS. (http://stnava.github.io/ANTs/)
 
 ## Preprocessing steps
 1. despiking.m  
 *Discard frames with excessive motion in data (aka motion scrubbing).*
 2. alignment\_checking\_tool.m  
 *A graphcial user interface (GUI) to manually coregister a rsfMRI scan to a template.*
-3. pre\_ic\_labeling.m  
+3. motion\_correction.m
 *Motion correction (save motion parameters);*  
+4. ica_cleaning.m  
 *Run independent component analysis (ICA) with the GIFT ICA toolbox to identify noisy independent components (ICs);*  
-*Spatial smoothing;*  
-*Save averaged WM/CSF signal.*  
-4. copy\_ica\_results\_4labeling.m  
-*Copy ICA results to an temporary folder for the ease of manual labeling.*  
-*Save spatial maps, time courses, and frequency spetrums of the ICs to figures.*  
-5. ica_cleaning_view.m  
+5. copy\_ica\_results\_4labeling.m  
+* *Copy ICA results to an temporary folder for the ease of manual labeling.*  
+* *Save spatial maps, time courses, and frequency spetrums of the ICs to figures.*  
+6. ica_cleaning_view.m  
 *A GUI to manually label the ICs.*  
-6. copy\_labels.m  
+7. copy\_labels.m  
 *Copy IC labels to the database folder.*  
-7. post\_ic\_labeling.m  
-*Soft IC-regressing the spatially-smoothed images, along with the motion parameters and averaged WM/CSF signal;*  
-*Temporal filtering.*  
+8. last_steps.m  
+* *Soft IC-regressing the spatially-smoothed images, along with the motion parameters and the [CompCor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2214855/) regressors;*  
+* *Spatial smoothing.*
+* *Temporal filtering.*  
 
 ## Database folder structure
 ```bash
