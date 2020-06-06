@@ -1,0 +1,91 @@
+index,ROI,ROI_abbreviation,system
+1,anterior amygdaloid area,AAA,Amygdala complex
+2,basolateral nucleus amygdala ,BLA,Amygdala complex
+3,lateral nucleus amygdala,LA,Amygdala complex
+4,medial nucleus amygdala,MEA,Amygdala complex
+5,centeral nucleus amygdala ,CeA,Amygdala complex
+6,posterior nucleus amygdala,PA,Amygdala complex
+7,piriform amygdaloid area,PAA,Amygdala complex
+8,cortical nucleus of amygdala,COA,Amygdala complex
+9,basomedial nucleus amygdala ,BMA,Amygdala complex
+10,endopiriform nucleus/endopiriform claustrum of rodents,EP,Claustrum
+11,Claustrum,CLA,Claustrum
+12,CA1,CA1,Hippocampal region
+13,CA2,CA2,Hippocampal region
+14,CA3,CA3,Hippocampal region
+15,dentate gyrus,DG,Hippocampal region
+16,entorhinal area,ENT,Retrohippocampal region
+17,presubiculum,PRE,Retrohippocampal region
+18,postsubiculum,POST,Retrohippocampal region
+19,parasubiculum,PAR,Retrohippocampal region
+20,subiculum,SUB,Retrohippocampal region
+21,anterodorsal nucleus thalamus,AD,Thalamus
+22,anteromedial nucleus thalamus,AM,Thalamus
+23,anterioventral nucleus thalamus,AV,Thalamus
+24,ventral anterio-lateral complex thalamus,VAL,Thalamus
+25,ventral medial nucleus thalamus,VM,Thalamus
+26,ventral posterolateral nucleus thalamus,VPL,Thalamus
+27,ventral posteromedial nucleus thalamus,VPM,Thalamus
+28,lateral dorsal nucleus of Thalamus (LD),LD,Thalamus
+29,lateral posterior nucleus of Thalamus (LP),LP,Thalamus
+30,central lateral nucleus of Thalamus (CL),CL,Thalamus
+31,medial dorsal Thalamus,MD,Thalamus
+32,midline thalamic nuclie,MID,Thalamus
+33,lateral geniculate complex ,LG,Thalamus
+34,zona incerta,ZI,Thalamus
+35,reticular nucleus thalamus,RT,Thalamus
+36,lateral habenula,LH,Thalamus
+37,medial habenula,MH,Thalamus
+38,anterior hypothalamic nucleus,AHA,Hypothalamus
+39,dorsomedial nucleus hypothalamus ,DMH,Hypothalamus
+40,lateral hypothalamic area,LHA,Hypothalamus
+41,ventromedial nucleus hypothalamus,VMH,Hypothalamus
+42,posterior hypothalamic nucleus,PH,Hypothalamus
+43,mammillary complex,MAM,Hypothalamus
+44,pituitary,PIT,Hypothalamus
+45,preoptic area,POA,Hypothalamus
+46,paraventricular nucleus hypothalamus,PVH,Hypothalamus
+47,lateral septum complex,LSC,Striatum
+48,caudoputamen,CP,Striatum
+49,accumbens,ACB,Striatum
+50,olfactory tubercle,OT,Striatum
+51,fundus of the striatum,FS,Striatum
+52,medieum septum complex,MSC,Pallidum
+53,globus pallidus,GP,Pallidum
+54,ventral pallicum,VP,Pallidum
+55,stria terminalis,BST,Pallidum
+56,anterior cingulate cortex,ACA,Polymodal association
+57,prelimbic area,PL,Polymodal association
+58,orbital area,ORB,Polymodal association
+59,agranular insula,AI,Polymodal association
+60,retrosplenium complex,RSP,Polymodal association
+61,posterior parietal cortex,PTL,Polymodal association
+62,ventral temporal association areas,TEv,Polymodal association
+63,ectorhinal area,ECT,Polymodal association
+64,perirhinal area,PER,Polymodal association
+65,main olfactory bulb,MOB,Sensory-motor
+66,anterior olfactory nucleus,AON,Sensory-motor
+67,accesory olfactory bulb,AOB,Sensory-motor
+68,nucl lateral olfactory tract,NLOT,Sensory-motor
+69,taenia tecta,TT,Sensory-motor
+70,infralimbic area,ILA,Sensory-motor
+71,piriform area,PIR,Sensory-motor
+72,gustatory area,GU,Sensory-motor
+73,visceral area,VISC,Sensory-motor
+74,postpiriform transition area,TR,Sensory-motor
+75,pimary motor cortex,Mop,Sensory-motor
+76,secondary motor cortex,Mos,Sensory-motor
+77,primary somatosensory cortex,SSp,Sensory-motor
+78,supplemental somatosensory cortex,SSs,Sensory-motor
+79,auditory cortex,AUD,Sensory-motor
+80,visual cortex,VIS,Sensory-motor
+81,substantia nigra,SN,midbrain
+82,periaqueductal gray,PAG,midbrain
+83,Ventral tegmental area,VTA,midbrain
+84,interpeduncular nucleus ,IPN,midbrain
+85,superior colliculus ,SC,midbrain
+86,mesencephalic reticular nucleus,MRN,midbrain
+87,raphe complex,RPH,midbrain
+88,parabrachial nucleus,PBI,pons
+89,pontine reticular nucleus,PRN_,pons
+90,tegmental reticular nucleus pontine gray,TRN,pons
