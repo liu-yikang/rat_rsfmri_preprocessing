@@ -6,6 +6,7 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 2. jsonlab. (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files)
 3. Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
 4. ANTS. (http://stnava.github.io/ANTs/)
+5. export_fig. (https://github.com/altmany/export_fig)
 
 ## Preprocessing steps
 1. despiking.m  
