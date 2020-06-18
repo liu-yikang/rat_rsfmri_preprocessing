@@ -1,7 +1,7 @@
 % Correcting head motions in manually coregistered images with SPM.
 
 % Author: Yikang Liu
-% Last modified data: 05/24/2020
+% Last modified date: 05/24/2020
 
 %%%%%%%%%%%%%% set parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 data_dir='/path/to/data';
