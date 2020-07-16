@@ -120,7 +120,7 @@ for i_rat = 1:length(rat_list)
         %% save the final result %%%%%%%%%%%%
         nii.img = img;
         preproc_dir = fullfile(data_dir, rat_list(i_rat).name, 'rfmri_processed');
-        save_nii(nii, fullfile(preproc_dir, [scan_name,'_t2_clean.nii']), [1,1,1]);
+        save_nii(nii, fullfile(preproc_dir, [scan_name,'.nii']), [1,1,1]);
         
         % save .json file
         fid = fopen([scan_name, '_motioncorrected.json'], 'r');
