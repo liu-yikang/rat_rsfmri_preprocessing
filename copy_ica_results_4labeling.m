@@ -16,7 +16,7 @@ ica_dir = '/home/project/organize_database/test';
 mkdir(ica_dir);
 rat_list = dir(fullfile(data_dir, 'rat*'));
 for i = 1:length(rat_list)
-    scan_list = dir(fullfile(data_dir, rat_list(i).name, 'rfmri_intermediate', '*smoothed.nii'));
+    scan_list = dir(fullfile(data_dir, rat_list(i).name, 'rfmri_intermediate', '*warped.nii'));
     for j = 1:length(scan_list)
         copyfile(fullfile(scan_list(j).folder, [scan_list(j).name(1:2), '.gift_ica']),...
             fullfile(ica_dir, [rat_list(i).name, '_', scan_list(j).name(1:2)]));

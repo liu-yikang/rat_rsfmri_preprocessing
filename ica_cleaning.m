@@ -13,7 +13,7 @@ FWHM_ica=0.7; %FWHM=0.7mm
 rat_list = dir(fullfile(data_dir, 'rat*'));
 for i=1:length(rat_list)
     cd(fullfile(data_dir, rat_list(i).name, 'rfmri_intermediate'));
-    scan_list = dir('*motioncorrected.nii.gz'); 
+    scan_list = dir('*warped.nii.gz'); 
     
     for j = 1:length(scan_list)
         scan_name = scan_list(j).name(1:2);
@@ -24,7 +24,7 @@ for i=1:length(rat_list)
         delete([folder, '/*']);
         
         % load a motion corrected image
-        nii = load_nii([scan_name, '_motioncorrected.nii.gz']);
+        nii = load_nii([scan_name, '_warped.nii.gz']);
         img = nii.img;
         
         % spatial smoothing
@@ -41,11 +41,12 @@ for i=1:length(rat_list)
         
         % write a script for GIFT ICA
         script_dir = strrep(mfilename('fullpath'), mfilename, '');
-        fi = fopen(fullfile(script_dir, 'inputs_ica.m'),'r');
+        fi = fopen(fullfile(script_dir, 'inputs_ica.m'),'r'); % open a script template
         fileo = fullfile(script_dir, ['inputs_ica',...
-            rat_list(i).name,'_',scan_list(j).name(3:4),'.m']);
-        fo = fopen(fileo,'w');
-                
+            rat_list(i).name,'_',scan_list(j).name(3:4),'.m']); 
+        fo = fopen(fileo,'w'); % the file to write into
+        
+        % replace strings in the template to generate script for the scan
         while ~feof(fi)
             l = fgetl(fi);
             if strfind(l,'outputDir') == 1
@@ -62,9 +63,10 @@ for i=1:length(rat_list)
         fclose(fo);
         
         cd(folder);
-        icatb_batch_file_run(fileo);
+        icatb_batch_file_run(fileo); % run the script with GIFT ICA
         close all;
         
+        % delete spatially-smoothed image after ICA
         cd(fullfile(data_dir, rat_list(i).name, 'rfmri_intermediate'));
         delete(tmp);
 

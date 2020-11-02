@@ -12,8 +12,8 @@ Download the following software packages before using the toolbox:
 - ANTS. (http://stnava.github.io/ANTs/)
 - export_fig. (https://github.com/altmany/export_fig)
 ### Step 2: Organize your data into the following structure.
-- `ratxxx` is the label for the subject. You can use other names here.
-- Folder `rfmri_unprocessed` under `ratxxx` contains raw EPI scans for the subject.
+- `ratxxx` is the label for the subject. You can use other labels, but all labels should have the same length and [`subjname_len` parameter in `copy_labels.m`](copy_labels.m#L11) needs to be changed.
+- Folder `rfmri_unprocessed` under `ratxxx` contains raw EPI scans (e.g. `xx.nii`) for the subject. File name of the scans should have the format 'xx.nii'.
 ```bash
 ├── rat001
 │   ├── rfmri_unprocessed

@@ -19,9 +19,7 @@ end
 rat_list = dir(fullfile(data_dir, 'rat*'));
 for i=1:length(rat_list)
     cd(fullfile(data_dir, rat_list(i).name, 'rfmri_intermediate'));
-    scan_list = dir('mr*'); 
-    % 'mr*' indicates newly manually registered image;
-    % it's renamed to *_registered.nii.gz after motion correction
+    scan_list = dir('*_registered.nii.gz'); 
     
     for j = 1:length(scan_list)
         nii = load_nii(scan_list(j).name);
@@ -106,7 +104,7 @@ for i=1:length(rat_list)
         s = fread(fid);
         fclose(fid);
         a = jsondecode(char(s)');
-        a.Steps.Order = [a.Steps.Order, '; Motion Correction';
+        a.Steps.Order = [a.Steps.Order, '; Motion Correction'];
         a.Steps.MotionCorrection.software='SPM';
         a.Steps.MotionCorrection.spatial_resize='x10';
         a.Steps.MotionCorrection.realign_flags.quality = 0.9;
