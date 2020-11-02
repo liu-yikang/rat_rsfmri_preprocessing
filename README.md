@@ -36,6 +36,7 @@ This step discards frames with excessive motion.
 
 ### Step 4: Rigid-body registration
 - Use [`alignment_checking_tool.m`](alignment_checking_tool.m) (a graphical user interface) to manually register a rsfMRI scan to a built-in anatomical template.
+- A detailed manual is [here](manuals/User_Manual_of_the_Alignment_Checking_Tool.pdf). 
 - [`alignment_checking_tool.m`](alignment_checking_tool.m) generates the following files under `rfmri_intermediate` in each subject folder `ratxxx`:
     - `xx_tform.mat`: rigid-body registration matrix.
     - `xx_registered.json`: add rigid-body registration matrix to `xx_despiked.json`.
@@ -76,6 +77,7 @@ In this step, we will run ICA (IC=50) on individual scans (`xx_motioncorrected.n
 - Run [`copy_ica_results_4labeling.m`](copy_ica_results_4labeling.m).
 #### ICA labeling
 - Use [`ica_cleaning_view.m`](ica_cleaning_view.m) (a graphical user interface) to label bad indepedent components. Please check labeling criterions here https://www.sciencedirect.com/science/article/pii/S1053811920305802#tbl1.  
+- A manual is [here](manuals/ica_cleaning_view_manual.pdf).
 - `ica_cleaning_view.m` stores labels under `[ica_dir]/labels`.
 #### Copy ICA labels back to `data_dir`
 - Change [`data_dir` parameter in `copy_labels.m`](copy_labels.m#L7) to the path to your data.
