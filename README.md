@@ -38,7 +38,7 @@ This step discards frames with excessive motion.
 - Use [`alignment_checking_tool.m`](alignment_checking_tool.m) (a graphical user interface) to manually register a rsfMRI scan to a built-in anatomical template.
 - [`alignment_checking_tool.m`](alignment_checking_tool.m) generates the following files under `rfmri_intermediate` in each subject folder `ratxxx`:
     - `xx_tform.mat`: rigid-body registration matrix.
-    - `xx_registered.json`: Add rigid-body registration matrix.
+    - `xx_registered.json`: add rigid-body registration matrix to `xx_despiked.json`.
     - `xx_registered.nii.gz`: registered fMRI scan.
 
 ### Step 5: Motion correction
@@ -46,7 +46,7 @@ This step corrects motion (by registering every frame to the first one) in `xx_r
 - Change [`data_dir` parameter in `motion_correction.m`](motion_correction.m#L7) to the path to your data.
 - Run [`motion_correction.m`](motion_correction.m).
 - `motion_correction.m` generates the following files under `rfmri_intermediate` in each subject folder `ratxxx`:
-    - `xx_motioncorrected.json`: Add SPM settings for motion correction.
+    - `xx_motioncorrected.json`: add SPM settings for motion correction to `xx_registered.json`.
     - `xx_motion.json` and `xx_motion.txt`: motion parameters in .json format and text format respectively. 
     - `xx_motioncorrected.nii.gz`: motion-corrected fMRI scan.
     - `xx_motioncorrected_frame1.nii`: the 1st frame of `xx_motioncorrected.nii.gz` for spatial normalization.
@@ -60,6 +60,7 @@ This step corrects distortions in fMRI images by nonlinearly (deformable) regist
     - `xx_affine.txt`: affine transformation matrix.
     - `xx_warp_field.nii.gz`: field to warp fMRI.
     - `xx_warped.nii.gz`: warped fMRI from `xx_motioncorrected.nii.gz`.
+    - `xx_warped.json`: add deformation info to `xx_motioncorrected.json`.
 
 ### Step 7: ICA cleaning
 In this step, we will run ICA (IC=50) on individual scans (`xx_motioncorrected.nii.gz`), manually label bad components, and regress out time courses of these components.
