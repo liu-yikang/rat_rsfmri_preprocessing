@@ -1,16 +1,67 @@
 # Rat rsfMRI Preprocessing Toolbox
-Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfmri. 
+Preprocessing codes for the rat rs-fMRI database (www.nitrc.org/projects/rat_rsfmri). 
 
-## Prerequisites:
-1. GIFT ICA toolbox. (https://www.nitrc.org/projects/gift)
-2. jsonlab. (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files)
-3. Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
-4. ANTS. (http://stnava.github.io/ANTs/)
-5. export_fig. (https://github.com/altmany/export_fig)
+## Quick Start
+This section is a quick-start guide to this toolbox. More details can be found in code comments.
+### Step 1: Download prerequisites:
+Download the following software packages before using the toolbox:
+- GIFT ICA toolbox. (https://www.nitrc.org/projects/gift) 
+- jsonlab. (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files)
+- Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
+- ANTS. (http://stnava.github.io/ANTs/)
+- export_fig. (https://github.com/altmany/export_fig)
+### Step 2: Organize your data into the following structure.
+- `ratxxx` is the label for the subject. You can other names here.
+- Folder `rfmri_unprocessed` under `ratxxx` contains raw EPI scans for the subject.
+```bash
+├── rat001
+│   ├── rfmri_unprocessed
+│   │   ├── 01.nii
+│   │   ├── 02.nii
+│   │   ├── 03.nii
+│   │   └── 04.nii
+├── rat002
+...
+```
+### Step 3: Despiking (motion scrubbing).
+- Change `data_dir` parameter in `despiking.m` to the path to your data.
+- Run `despiking.m` to discard frames with excessive motion. 
+- The script will create a folder `rfmri_intermediate` in each subject folder `ratxxx` and generate the following files:
+    - `xx_despiked.json`: despiking information for `xx.nii` in `rfmri_unprocessed`, containing Contains framewise displacements, scrubbing criterion, and scrubbed frames.
+    - `xx_despiked.nii.gz`: despiked fMRI scan.
 
-## Preprocessing steps
-1. despiking.m  
-*Discard frames with excessive motion in data (aka motion scrubbing).*
+### Step 4: Rigid-body registration
+- Use `alignment_checking_tool.m` to manually register a rsfMRI scan to a built-in anatomical template.
+- `alignment_checking_tool.m` generates the following files under `rfmri_intermediate` in each subject folder `ratxxx`:
+    - `xx_tform.mat`: rigid-body registration matrix
+    - `xx_registered.json`: rigid-body registration matrix in .json format
+    - `xx_registered.nii.gz`: registered fMRI scan
+
+### Step 5: Motion correction
+- Change `data_dir` parameter in `motion_correction.m` to the path to your data.
+- Run `motion_correction.m` to correct motion (register every frame to the first one) in `xx_registered.nii.gz` using SPM built-in functions.
+- `motion_correction.m` generates the following files under `rfmri_intermediate` in each subject folder `ratxxx`:
+    - `xx_motioncorrected.json`: SPM settings for motion correction.
+    - `xx_motion.json` and `xx_motion.txt`: motion parameters in .json format and text format respectively. 
+    - `xx_motioncorrected.nii.gz`: motion-corrected fMRI scans.
+
+### Step 6: ICA cleaning
+- In this step, we will run ICA (IC=50) on individual scans (`xx_motioncorrected.nii.gz`), manually label bad components, and regress out time courses of these components.
+- Change `data_dir` parameter in `ica_cleaning.m` to the path to your data.
+- Adjust `FWHM_ica` parameter in `ica_cleaning.m` based on your need. It controls the strengh of spatial smoothing prior to ICA, via adjusting full-width-at-half-maximum of Gaussian kernel for spatial smoothing (default = 0.7 mm). Smoothing helps to make spatial IC maps look cleaner and easier to label. fMRI scans with high signal/contrast-to-noise ratio don't need smoothing (set `FWHM_ica` to 0). 
+- `ica_cleaning.m`generates a folder `xx.gift_ica` under `rfmri_intermediate` in each subject folder `ratxxx`, which contains ICA outputs by SPM. 
+
+
+<ol>
+<li> 
+<strong>Despiking (motion scrubbing)</strong></br>
+<em>Description</em> Discard frames with excessive motion.</br>
+<em>Instruction</em> Run `Despiking.m`
+<li>
+<strong>Rigid-body registration</strong>Register fMRI images to a template</strong>
+
+<li>1. despiking.m  
+* (aka motion scrubbing).*
 2. alignment\_checking\_tool.m  
 *A graphcial user interface (GUI) to manually coregister a rsfMRI scan to a template.*
 3. motion\_correction.m
@@ -28,6 +79,19 @@ Preprocessing codes for the rat rs-fMRI database www.nitrc.org/projects/rat_rsfm
 *Soft IC-regressing warped images, along with the motion parameters and the [CompCor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2214855/) regressors;*  
 *Spatial smoothing.*
 *Temporal filtering.*  
+
+</ol>
+
+## Prerequisites:
+The following packages need to be downloaded before using the toolbox:
+1. GIFT ICA toolbox. (https://www.nitrc.org/projects/gift)
+2. jsonlab. (https://www.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files)
+3. Tools for NIfTI and ANALYZE image (https://www.mathworks.com/matlabcentral/fileexchange/8797-tools-for-nifti-and-analyze-image)
+4. ANTS. (http://stnava.github.io/ANTs/)
+5. export_fig. (https://github.com/altmany/export_fig)
+
+## Preprocessing steps
+
 
 ## Database folder structure
 ```bash
