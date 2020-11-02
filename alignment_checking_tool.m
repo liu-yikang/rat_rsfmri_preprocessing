@@ -2,8 +2,8 @@ function varargout = alignment_checking_tool(varargin)
 
 % GUI for coregistering the first frame of a rat rsfMRI scan to a built-in template. 
 % Output files: 
-%    coregistered image: 'mr*'
-%    transformation matrix: '*_checked_tform.mat'
+%    coregistered image: '*_registered'
+%    transformation matrix: '*_tform.mat'
 
 % Author: Yikang Liu
 % Last modified data: 11/05/2019
