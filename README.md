@@ -83,7 +83,7 @@ In this step, we will run ICA (IC=50) on individual scans (`xx_motioncorrected.n
 - `copy_labels.m` copies the labels to `ratxxx/rfmri_intermediate/xx.gift_ica/labels.csv`.
 
 ### Step 8: Soft regression + spatial/temporal filtering
-- This step 'soft' regresses bad IC components and 'hard' regresses motion parameters and white matter (WM) and cerebral spinal fluid(CSF) signals. 
+This step 'soft' regresses bad IC components and 'hard' regresses motion parameters and white matter (WM) and cerebral spinal fluid(CSF) signals. 
 - Change `data_dir` parameter in `last_steps.m` to the path to your data.
 - Change `regression_option` parameter in `last_steps.m` based on your need. 
     - 1: hard-regress average WM/CSF signal and motion parameters
