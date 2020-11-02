@@ -31,13 +31,14 @@ for i = 1:length(list)
     cd(fullfile(list(i).folder, list(i).name));
     mkdir('report');
     load('ica__ica.mat');
-    load('ica__ica_br1.mat');
+    % load('ica__ica_br1.mat');
     tc = compSet.tc';
+    icasig = compSet.ic;
     
     for j = 1:50
         
-        f = figure('visible', 'off');
-        show_brain_map(icasig(j,:),[],1.1,max(icasig(j,:)),0,3:18,1,f);colormap('jet');colorbar;
+        % f = figure('visible', 'off');
+        show_brain_map(icasig(j,:),[],1.1,max(icasig(j,:)),0,3:18,1);colormap('jet');colorbar;
         export_fig(fullfile(list(i).folder, list(i).name, 'report', ['ic', num2str(j),'_map.tif']));
         close all;
         

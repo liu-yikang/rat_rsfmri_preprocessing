@@ -28,11 +28,16 @@ for i=1:length(rat_list)
         img = nii.img;
         
         % spatial smoothing
-        img = rsfmri_smooth(img,FWHM_ica,nii.hdr.dime.pixdim(2));
-        img(isnan(img)) = 0;
-        nii.img = img;
-        tmp = fullfile(pwd, [scan_name, '_despiked_registered_aligned_sm_ica.nii']);
-        save_nii(nii, tmp);
+        if FWHM_ica > 0
+            img = rsfmri_smooth(img,FWHM_ica,nii.hdr.dime.pixdim(2));
+            img(isnan(img)) = 0;
+            nii.img = img;
+            tmp = fullfile(pwd, [scan_name, '_despiked_registered_aligned_sm_ica.nii']);
+            save_nii(nii, tmp);
+        else
+            tmp = fullfile(pwd, [scan_name, '_despiked_registered_aligned_sm_ica.nii']);
+            save_nii(nii, tmp);
+        end
         
         % write a script for GIFT ICA
         script_dir = strrep(mfilename('fullpath'), mfilename, '');
@@ -62,5 +67,21 @@ for i=1:length(rat_list)
         
         cd(fullfile(data_dir, rat_list(i).name, 'rfmri_intermediate'));
         delete(tmp);
+
+        % save .json file
+        fid = fopen([scan_name, '_warped.json'], 'r');
+        s = fread(fid);
+        a = jsondecode(char(s)');
+        a.Steps.Order = [a.Steps.Order, '; IC Noise Cleaning'];
+        a.Steps.ICA.software = 'GIFT ICA';
+        a.Steps.ICA.spatial_smoothing_fwhm = [num2str(FWHM_ica), ' mm'];
+        a.Steps.ICA.IC_number = 50;
+        
+        s = jsonencode(a);
+        json = [scan_name, '_cleaned.json'];
+        fid = fopen(json, 'w');
+        fwrite(fid, s, 'char');
+        fclose(fid);
+        a = loadjson(json); savejson('', a, json); % reformat
     end
 end

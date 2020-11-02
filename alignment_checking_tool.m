@@ -322,9 +322,28 @@ for i = 1:size(img,4)
 end
 nii = make_nii(img_out,[dx,dy,dz],[1,1,1]);
 name_new = strsplit(name_new,'.'); % remove file extension
-mkdir(strrep(pathstr,'functional','aligned'));
-save_nii(nii,fullfile(strrep(pathstr,'functional','aligned'),['mr',name_new{1},'.nii']));
-save(fullfile(strrep(pathstr,'functional','aligned'),[name_new{1},'_checked_tform.mat']),'tform');
+name_new = strrep(name_new{1}, '_despiked', '');
+save_nii(nii,fullfile(pathstr, [name_new,'_registered.nii']));
+gzip(fullfile(pathstr, [name_new,'_registered.nii']));
+delete(fullfile(pathstr, [name_new,'_registered.nii']));
+save(fullfile(pathstr, [name_new,'_tform.mat']),'tform');
+
+% create *_registered.json
+fid = fopen([scan_name, '_despiked.json'], 'r');
+s = fread(fid);
+fclose(fid);
+a = jsondecode(char(s)');
+a.Space = 'atlas';
+a.Steps.Order = [a.Steps.Order, '; Registration'];
+a.Steps.Registration.method='Manually register the 1st frame';
+a.Steps.Registration.transformation_matrix = tform.T;
+s = jsonencode(a);
+fid = fopen([name_new, '_registered.json'], 'w');
+fwrite(fid, s, 'char');
+fclose(fid);
+a = loadjson([name_new, '_registered.json']); 
+savejson('', a, [name_new, '_registered.json']); % reformat
+
 msgbox('Done');
 
 function edit_xtran_Callback(hObject, eventdata, handles)

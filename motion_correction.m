@@ -78,37 +78,35 @@ for i=1:length(rat_list)
         fwrite(fid, s, 'char');
         fclose(fid);
         
-        % rename registered file
-        movefile(scan_list(j).name, [scan_name, '_registered.nii']);
-        gzip([scan_name, '_registered.nii']);
-        delete([scan_name, '_registered.nii']);
+        % % rename registered file
+        % movefile(scan_list(j).name, [scan_name, '_registered.nii']);
+        % gzip([scan_name, '_registered.nii']);
+        % delete([scan_name, '_registered.nii']);
         
-        % create *_registered.json
-        fid = fopen([scan_name, '_despiked.json'], 'r');
-        s = fread(fid);
-        fclose(fid);
-        a = jsondecode(char(s)');
-        a.Space = 'atlas';
-        a.SkullStripped = false;
-        a.Steps.Order = 'Despiking; Registration';
-        a.Steps.Registration.method='Manually register the 1st frame';
-        load([scan_name, '_despiked_checked_tform.mat']);
-        a.Steps.Registration.transformation_matrix = tform.T;
-        s = jsonencode(a);
-        fid = fopen([scan_name, '_registered.json'], 'w');
-        fwrite(fid, s, 'char');
-        fclose(fid);
-        a = loadjson([scan_name, '_registered.json']); savejson('', a, [scan_name, '_registered.json']); % reformat
-        delete([scan_name, '_despiked_checked_tform.mat']);
+        % % create *_registered.json
+        % fid = fopen([scan_name, '_despiked.json'], 'r');
+        % s = fread(fid);
+        % fclose(fid);
+        % a = jsondecode(char(s)');
+        % a.Space = 'atlas';
+        % a.SkullStripped = false;
+        % a.Steps.Order = 'Despiking; Registration';
+        % a.Steps.Registration.method='Manually register the 1st frame';
+        % load([scan_name, '_despiked_checked_tform.mat']);
+        % a.Steps.Registration.transformation_matrix = tform.T;
+        % s = jsonencode(a);
+        % fid = fopen([scan_name, '_registered.json'], 'w');
+        % fwrite(fid, s, 'char');
+        % fclose(fid);
+        % a = loadjson([scan_name, '_registered.json']); savejson('', a, [scan_name, '_registered.json']); % reformat
+        % delete([scan_name, '_despiked_checked_tform.mat']);
         
         % create *_motioncorrected.json
         fid = fopen([scan_name, '_registered.json'], 'r');
         s = fread(fid);
         fclose(fid);
         a = jsondecode(char(s)');
-        a.Space = 'atlas';
-        a.SkullStripped = true;
-        a.Steps.Order = 'Despiking; Registration; Motion Correction';
+        a.Steps.Order = [a.Steps.Order, '; Motion Correction';
         a.Steps.MotionCorrection.software='SPM';
         a.Steps.MotionCorrection.spatial_resize='x10';
         a.Steps.MotionCorrection.realign_flags.quality = 0.9;

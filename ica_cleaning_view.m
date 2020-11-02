@@ -196,10 +196,9 @@ function listbox1_Callback(hObject, eventdata, handles)
 global scan_index ic_index label_table scan_list result_path;
 ic_index = 1;
 scan_index = get(hObject, 'Value');
-try
+if isfile(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.csv']))
     label_table = readtable(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.csv']));
-    % label_table = label_table(1:51,1:4);
-catch
+else
     label_table = table((1:50)', zeros(50,1), zeros(50,1), zeros(50,1), ...
         'VariableNames', {'IC_NO', 'RSN', 'NOISE', 'OTHER'});
 end
@@ -289,10 +288,9 @@ if ~isempty(scan_list)
         scans(end+1, 1) = {scan_list(i_list).name};
     end
     handles.listbox1.String = scans;
-    try
+    if isfile(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.csv']))
         label_table = readtable(fullfile(result_path, 'labels', [scan_list(scan_index).name,'.csv']));
-        % label_table = label_table(1:51,1:4);
-    catch
+    else
         label_table = table((1:50)', zeros(50,1), zeros(50,1), zeros(50,1), ...
             'VariableNames', {'IC_NO', 'RSN', 'NOISE', 'OTHER'});
     end
