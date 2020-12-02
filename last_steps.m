@@ -98,8 +98,8 @@ for i_rat = 1:length(rat_list)
         % load motion param
         motion = load([scan_name, '_motion.txt']);
         motion = detrend(motion);
-        % hard regressors: WM/CSF + motion parameters        
-        regressors = normalize([wmcsf_reg, motion], 1);
+        % hard regressors
+        regressors = normalize([tcs, motion], 1);
         
         %% soft regression %%%%%%%%%%%%%%%%%%%%%%%    
         % regress WM/CSF signal and motion parameters from image
